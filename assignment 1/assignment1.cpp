@@ -1,4 +1,5 @@
 // assignment1.cpp
+// Compile with g++ -std=c++17 assignment1.cpp
 
 #include <iostream>
 #include <iomanip>	// Required to set precision of cout apparently
