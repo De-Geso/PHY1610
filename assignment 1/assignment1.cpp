@@ -1,5 +1,9 @@
 // assignment1.cpp
-// Compile with g++ -std=c++17 assignment1.cpp
+// Find the optimal angle to launch a projectile by integrating ODEs.
+// Uses RK4 and a bracketed search to find the maximum range, and
+// associated angle.
+// Compile with: g++ -std=c++17 assignment1.cpp 
+// Run with: ./a.out
 
 #include <iostream>
 #include <iomanip>	// Required to set precision of cout apparently
