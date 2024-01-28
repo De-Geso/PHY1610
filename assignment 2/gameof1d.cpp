@@ -28,31 +28,12 @@
 
 #include <iostream>
 #include <memory>
-#include "initcell.h"
+#include "initlife.h"
+#include "outputlife.h"
+#include "updatelife.h"
 
 // We use bool to store the state of each cell, but for convenience define the following
-const bool alive = true;
-const bool dead = false;
-using Cells = std::unique_ptr<bool[]>;
-// Determine next state of a single cell based on the state of all the cells
-bool next_cell_state(const Cells& cell_state, int cell_index, int num_cells) {
-    // the modulus operator (%) enforces periodic boundary conditions
-    int alive_neighbours = 0;
-    for (int j = 1; j <= 2; j++) {
-        if (cell_state[(cell_index+j+num_cells)%num_cells] == alive)
-            alive_neighbours++;
-        if (cell_state[(cell_index-j+num_cells)%num_cells] == alive)
-            alive_neighbours++;
-    }
-    if (cell_state[cell_index] == alive  and
-        (alive_neighbours == 2 or alive_neighbours == 4))
-        return alive;
-    else if (cell_state[cell_index] == dead  and
-               (alive_neighbours == 2 or alive_neighbours == 3))
-        return alive;
-    else
-        return dead;
-}
+// Constants and definitions now live in initlife.h.
 
 int main(int argc, char* argv[]) {
     // Set default simulation parameters then accept command line arguments
@@ -80,23 +61,12 @@ int main(int argc, char* argv[]) {
     
     // Simulation creation
     Cells cell(std::make_unique<bool[]>(num_cells));
+    // Initialize state of the system. Lives in initcell.cpp
     initcells(cell, num_cells, target_alive_fraction);
     
+    // Output time step, state of cells, and fraction of alive cells. Lives in outputlife.cpp
+    dump_cells(cell, num_cells, 0);
     
-    // Output time step, state of cells, and fraction of alive cells
-    const char on_char = 'I', off_char = '-';
-    double alive_fraction = 0.0;
-    for (int i = 0; i < num_cells; i++) 
-        if (cell[i] == alive)
-            alive_fraction++;
-    alive_fraction /= num_cells;
-    std::cout << 0 << "\t";
-    for (int i = 0; i < num_cells; i++)
-        if (cell[i] == alive)
-            std::cout << on_char;
-        else
-            std::cout << off_char;
-    std::cout << " " << alive_fraction << "\n";
     // Evolution loop
     for (int t = 0; t < num_steps; t++) {
         // Update cells
@@ -105,17 +75,7 @@ int main(int argc, char* argv[]) {
             newcell[i] = next_cell_state(cell, i, num_cells);
         std::swap(cell, newcell);  // swap without a copy
         // Output time step, state of cells, and fraction of alive cells
-        alive_fraction = 0.0;
-        for (int i = 0; i < num_cells; i++)
-            alive_fraction += cell[i];
-        alive_fraction /= num_cells;
-        std::cout << t+1 << "\t";
-        for (int i = 0; i < num_cells; i++)
-            if (cell[i] == alive)
-                std::cout << on_char;
-            else
-                std::cout << off_char;
-        std::cout << " " << alive_fraction << "\n";
+        dump_cells(cell, num_cells, t+1);
     }
 } // end main
 /*
