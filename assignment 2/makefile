@@ -1,14 +1,19 @@
 # Makefile for the 'gameof1d' program
-cxx=g++
-cxxflags=-std=c++17 -O3
-ldflags=-O3
-all: gameof1d
+CXX=g++
+CXXFLAGS=-std=c++17 -O3
+LDFLAGS=-O3
+
+all: gameof1d clean
 
 gameof1d: gameof1d.o initcell.o
-	$(cxx) $(ldflags) -o gameof1d gameof1d.o initcell.o $(LDLIBS)
+	$(CXX) $(LDFLAGS) -o gameof1d gameof1d.o initcell.o
 
 gameof1d.o: gameof1d.cpp initcell.h
-	$(cxx) -c $(cxxflags) -o gameof1d.o gameof1d.cpp
+	$(CXX) -c $(CXXFLAGS) -o gameof1d.o gameof1d.cpp
 
 initcell.o: initcell.cpp initcell.h
-	$(cxx) -c $(cxxflags) -o initcell.o initcell.cpp
+	$(CXX) -c $(CXXFLAGS) -o initcell.o initcell.cpp
+
+clean:
+	$(RM) gameof1d.o initcell.o
+.PHONY.: all clean

@@ -28,6 +28,7 @@
 
 #include <iostream>
 #include <memory>
+#include "initcell.h"
 
 // We use bool to store the state of each cell, but for convenience define the following
 const bool alive = true;
@@ -51,21 +52,6 @@ bool next_cell_state(const Cells& cell_state, int cell_index, int num_cells) {
         return alive;
     else
         return dead;
-}
-
-void initcells(std::unique_ptr<bool[]>& cell, int const num_cells, double const target_alive_fraction){
-    // Simulation creation
-	// cell(std::make_unique<bool[]>(num_cells));
-    // Fill cells such that the fraction of alive cells is approximately target_alive_fraction.
-    double fill = 0.0;
-    for (int i = 0; i < num_cells; i++) {
-        fill += target_alive_fraction;
-        if (fill >= 1.0) {
-            cell[i] = alive;
-            fill -= 1.0;
-        } else
-            cell[i] = dead;
-    }
 }
 
 int main(int argc, char* argv[]) {

@@ -1,5 +1,10 @@
 // initcell.h
+#ifndef INITCELL_H
+#define INITCELL_H
+
 #include <iostream>
 #include <memory>
 
-std::unique_ptr<bool[]> initcells (int const num_cells, double const target_alive_fraction);
+void initcells(std::unique_ptr<bool[]>& cell, int const num_cells, double const target_alive_fraction);
+
+#endif
