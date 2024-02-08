@@ -49,4 +49,7 @@ TEST_CASE("outputcells test")
     // Careful here. I have the correct precision, but if the cout precision changes, this test will fail.
     REQUIRE( text == "-1\t--I 0.333333\n" );
     buffer.str(std::string());
+
+    // Put the buffer back, otherwise there's segmentation faults.
+    std::cout.rdbuf(prevcoutbuf);
 }

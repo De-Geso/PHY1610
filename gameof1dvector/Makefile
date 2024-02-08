@@ -8,6 +8,9 @@ OBJS=gameof1d.o fillcells.o updatecells.o outputcells.o
 
 all: gameof1d originalgameof1d clean
 
+# Run all tests and clean up.
+test: run_fillcells_test run_outputcells_test run_updatecells_test integrated_test clean
+
 
 run_fillcells_test: fillcells_test
 	./fillcells_test
