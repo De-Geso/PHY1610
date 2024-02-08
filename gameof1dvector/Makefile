@@ -27,6 +27,16 @@ outputcells_test: outputcells_test.o outputcells.o
 outputcells_test.o: outputcells_test.cpp outputcells.h celltype.h
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
+run_updatecells_test: updatecells_test
+	./updatecells_test
+
+updatecells_test: updatecells_test.o updatecells.o
+	$(CXX) $(LDFLAGS) -o $@ $^ -lCatch2Main -lCatch2
+
+updatecells_test.o: updatecells_test.cpp outputcells.h celltype.h
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+
 integrated_test: originaltestoutput.txt testoutput.txt
 	diff originaltestoutput.txt testoutput.txt
 
@@ -58,6 +68,6 @@ run: gameof1d
 	./gameof1d
 
 clean:
-	$(RM) $(OBJS) fillcellstest.o
+	$(RM) $(OBJS) fillcellstest.o outputcellstest.o updatecellstest.o
 
 .PHONY.: all clean
