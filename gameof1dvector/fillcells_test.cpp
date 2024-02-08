@@ -32,5 +32,9 @@ TEST_CASE("fillcells test")
     Cells half_odd(n_odd);
     half_odd = { false, true, false };   // I don't know why, but this doesn't like to use alive and dead.
     REQUIRE( initial_cells(n_odd, 0.5) == half_odd );
-    
+
+    // Test case for just one cell.
+    Cells t = {true}, f = {false};
+    REQUIRE( initial_cells(1, 0.999999999999999) == f );
+    REQUIRE( initial_cells(1, 1.0) == t );
 }
