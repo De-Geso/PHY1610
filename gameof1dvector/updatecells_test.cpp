@@ -5,6 +5,7 @@
 
 TEST_CASE("updatecells test")
 {
+    // Lame all alive and all dead cases.
     Cells all_alive(3,true);
     Cells expected_alive(3,true);
     all_alive = update_all_cells(all_alive);

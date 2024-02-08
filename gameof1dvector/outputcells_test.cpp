@@ -31,6 +31,7 @@ TEST_CASE("outputcells test")
     REQUIRE( text == "10\t-- 0\n" );
     buffer.str(std::string());
 
+    // Mixed cases
     Cells cells1(1,true);
     output_cells(std::cout, 100, cells1);
     text = buffer.str();
