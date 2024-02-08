@@ -8,6 +8,16 @@ OBJS=gameof1d.o fillcells.o updatecells.o outputcells.o
 
 all: gameof1d originalgameof1d
 
+run_fillcells_test: fillcells_test
+	./fillcells_test
+
+fillcells_test: fillcells_test.o fillcells.o
+	$(CXX) $(LDFLAGS) -o $@ $^ -lCatch2Main -lCatch2
+
+fillcells_test.o: fillcells_test.cpp fillcells.h celltype.h
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+
 integrated_test: originaltestoutput.txt testoutput.txt
 	diff originaltestoutput.txt testoutput.txt
 
