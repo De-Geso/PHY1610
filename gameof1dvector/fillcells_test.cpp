@@ -10,7 +10,7 @@ TEST_CASE("fillcells test")
     const int n = 10;
     
     // These n's should not be changed unless the user also changes the expected output.
-    const int n_odd = 5;
+    const int n_odd = 3;
     const int n_even = 4;
 
     // Test case where all cells are alive.
@@ -25,8 +25,12 @@ TEST_CASE("fillcells test")
 
     // Test case where half of cells are alive for an even number.
     Cells half_even(n_even);
-//    half_even = { "true", "dead", "alive", "dead" };
-    half_even = { false, true, false, true };
+    half_even = { false, true, false, true };   // I don't know why, but this doesn't like to use alive and dead.
     REQUIRE( initial_cells(n_even, 0.5) == half_even );
+
+    // Test case where half of cells are alive for an odd number.
+    Cells half_odd(n_odd);
+    half_odd = { false, true, false };   // I don't know why, but this doesn't like to use alive and dead.
+    REQUIRE( initial_cells(n_odd, 0.5) == half_odd );
     
 }
