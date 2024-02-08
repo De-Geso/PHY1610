@@ -6,7 +6,7 @@ CXX=g++
 CXXFLAGS=-O3 -march=native
 OBJS=gameof1d.o fillcells.o updatecells.o outputcells.o
 
-all: gameof1d originalgameof1d
+all: gameof1d originalgameof1d clean
 
 run_fillcells_test: fillcells_test
 	./fillcells_test
@@ -16,7 +16,6 @@ fillcells_test: fillcells_test.o fillcells.o
 
 fillcells_test.o: fillcells_test.cpp fillcells.h celltype.h
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
-
 
 integrated_test: originaltestoutput.txt testoutput.txt
 	diff originaltestoutput.txt testoutput.txt
@@ -49,4 +48,6 @@ run: gameof1d
 	./gameof1d
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) fillcellstest.o
+
+.PHONY.: all clean
