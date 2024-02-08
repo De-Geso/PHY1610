@@ -8,6 +8,7 @@ OBJS=gameof1d.o fillcells.o updatecells.o outputcells.o
 
 all: gameof1d originalgameof1d clean
 
+
 run_fillcells_test: fillcells_test
 	./fillcells_test
 
@@ -15,6 +16,15 @@ fillcells_test: fillcells_test.o fillcells.o
 	$(CXX) $(LDFLAGS) -o $@ $^ -lCatch2Main -lCatch2
 
 fillcells_test.o: fillcells_test.cpp fillcells.h celltype.h
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+run_outputcells_test: outputcells_test
+	./outputcells_test
+
+outputcells_test: outputcells_test.o outputcells.o
+	$(CXX) $(LDFLAGS) -o $@ $^ -lCatch2Main -lCatch2
+
+outputcells_test.o: outputcells_test.cpp outputcells.h celltype.h
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 integrated_test: originaltestoutput.txt testoutput.txt
