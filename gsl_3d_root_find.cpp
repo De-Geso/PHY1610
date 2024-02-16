@@ -70,7 +70,7 @@ int main(void) {
 	gsl_vector_set (x, 2, x_init[2]);
 	
 	T = gsl_multiroot_fsolver_hybrids;
-	s = gsl_multiroot_fsolver_alloc (T, 3); // This should maybe be 2
+	s = gsl_multiroot_fsolver_alloc (T, 3);
 	
 	gsl_multiroot_fsolver_set (s, &f, x);
 	
@@ -90,6 +90,13 @@ int main(void) {
 	while (status == GSL_CONTINUE && iter < 1000);
 	
 	printf ("status = %s\n", gsl_strerror (status));
+	printf ("x0 = %f\n"
+		"x1 = %f\n"
+		"x2 = %f\n",
+		gsl_vector_get (s->x,0),
+		gsl_vector_get (s->x,1),
+		gsl_vector_get (s->x,2)
+		);
 	
 	gsl_multiroot_fsolver_free (s);
 	gsl_vector_free (x);
