@@ -19,6 +19,11 @@ int main(void) {
 	// Use gsl libraries to solve the polynomial
 	gsl_poly_solve_cubic (a[0], a[1], a[2], &x[0], &x[1], &x[2]);
 	
+	// There's one root, which is given as x0. Use our relationships
+	// to calculate y and z.
+	x[1] = (x[0] - c1) / 2.;
+	x[2] = c2 - x[0];
+	
 	// Output the roots.
 	for (i=0; i<3; i++) {
 		printf("x%d = %f\n", i, x[i]);

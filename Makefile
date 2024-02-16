@@ -10,11 +10,11 @@ LDFLAGS=-L/usr/include/gsl
 
 all: gsl_3d_root_find gsl_polynomial_root_find
 
+gsl_polynomial_root_find.o: gsl_polynomial_root_find.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $^
+
 gsl_polynomial_root_find: gsl_polynomial_root_find.o
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
-
-gsl_3d_polynomial_root_find.o: gsl_polynomial_root_find.cpp
-	$(CXX) $(CXXFLAGS) -c -o $@ $^
 
 run: gsl_polynomial_root_find
 	./gsl_polynomial_root_find
