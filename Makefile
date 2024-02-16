@@ -16,7 +16,14 @@ gsl_polynomial_root_find.o: gsl_polynomial_root_find.cpp
 gsl_polynomial_root_find: gsl_polynomial_root_find.o
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-run: gsl_polynomial_root_find
+gsl_3d_root_find.o: gsl_3d_root_find.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $^
+
+gsl_3d_root_find: gsl_3d_root_find.o
+	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
+runall: gsl_polynomial_root_find gsl_3d_root_find
+	./gsl_3d_root_find
 	./gsl_polynomial_root_find
 
 clean:
