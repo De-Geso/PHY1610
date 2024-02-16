@@ -16,10 +16,10 @@ gsl_polynomial_root_find: gsl_polynomial_root_find.o
 gsl_3d_polynomial_root_find.o: gsl_polynomial_root_find.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $^
 
-# run: gameof1d
-#	./gameof1d
+run: gsl_polynomial_root_find
+	./gsl_polynomial_root_find
 
-#clean:
-#	$(RM) $(OBJS) fillcellstest.o outputcellstest.o updatecellstest.o
+clean:
+	$(RM) $(OBJS)
 
 .PHONY.: all clean
