@@ -4,7 +4,7 @@
 #
 CXX=g++
 CXXFLAGS=-O3 -march=native
-OBJS=laplace.o init_laplace.o iter_laplace.o
+OBJS=laplace.o init_laplace.o iter_laplace.o output_laplace.o
 
 all: laplace clean
 
@@ -25,6 +25,9 @@ init_laplace.o: init_laplace.cpp init_laplace.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 
 iter_laplace.o: iter_laplace.cpp iter_laplace.h init_laplace.h
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
+
+output_laplace.o: output_laplace.cpp output_laplace.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 
 clean:

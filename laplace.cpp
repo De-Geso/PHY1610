@@ -2,6 +2,7 @@
 #include <rarray>
 #include "init_laplace.h"
 #include "iter_laplace.h"
+#include "output_laplace.h"
 
 int main(int argc, char* argv[]) {
     // Set default simulation parameters then accept command line arguments

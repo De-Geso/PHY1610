@@ -4,7 +4,6 @@
 #ifndef INIT_LAPLACEH
 #define INIT_LAPLACEH
 
-#include <cmath>
 #include <rarray>
 
 // Get the side length of the inner box
