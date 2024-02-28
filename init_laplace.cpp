@@ -34,7 +34,6 @@ rarray<double,2> initial_grid(int n)
     // middle, otherwise bias centre to top left.
     for (int i = (n-n_inner)/2; i < (n+n_inner)/2; i++) {
 		for (int j = (n-n_inner)/2; j < (n+n_inner)/2; j++) {
-			std::cout << i << '\t' << j << std::endl;
 			grid[i][j] = 1;
 		}
 	}

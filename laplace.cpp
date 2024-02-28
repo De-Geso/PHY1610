@@ -28,11 +28,15 @@ int main(int argc, char* argv[]) {
 	// Initialize grid, and make a copy for updates.
 	rarray<double,2> grid = initial_grid(n);
 	rarray<double,2> grid_next = grid.copy();
-	grid_next[0][0] = 10;
+	
+	double max_change = eps + 1;
+	do {
+		grid_next = update_grid(grid, n);
+		max_change = get_max_change(grid, grid_next, n);
+		grid = grid_next;
+	} 
+	while (max_change > eps);
+	
 	std::cout << grid << std::endl;
-	std::cout << grid_next << std::endl;
-	
-	grid = update_grid(grid_next, n);
-	
 	
 } // end main
