@@ -1,14 +1,22 @@
 // init_laplace.cpp
-// See filecells.h for documentation
+// See init_laplace.h for documentation
 // This code is part of assignment 5 of the 2024 Winter PHY1610 course.
 #include "init_laplace.h"
+
+int get_n_inner(int n)
+{
+	int n_inner;
+	round(0.1*n);
+    // Make sure the inner box is actually there.
+    if (n_inner==0)
+		n_inner = 1;
+	return n_inner;
+}
 
 rarray<double,2> initial_grid(int n)
 {
     rarray<double,2> grid(n,n);
-    int n_inner = round(0.1*n);
-    if (n_inner==0)
-		n_inner = 1;
+    int n_inner = get_n_inner(n);
     
     // Fill outer boundary. These should technically already be zero,
     // but it's probably good to be sure.
