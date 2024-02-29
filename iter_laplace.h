@@ -27,6 +27,7 @@ double next_grid_val(const rarray<double,2>& grid_state, int ii, int jj);
 // @param  oldgrid	current grid
 // @param  n	size of grid
 // @returns	grid updated according to Laplace's equation.
-rarray<double,2> update_grid(const rarray<double,2>& oldgrid, int n);
+// rarray<double,2> update_grid(const rarray<double,2>& oldgrid, int n);
+rarray<double,2> update_grid(const rarray<double,2>& oldgrid, int n, double& max_change);
 
 #endif

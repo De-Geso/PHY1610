@@ -48,19 +48,21 @@ int main(int argc, char* argv[]) {
 	
 	int counter = 0;
 	double max_change = eps + 1;
+	// double dummy = 1;
 	// Drive the iterations
 	do {
-		// Update the grid
-		grid_next = update_grid(grid, n);
+/*		// Update the grid
+		grid_next = update_grid(grid, n, dummy);
 		// Every x steps, check the change. Checking too often or too seldom
 		// increases run time. Faster than checking every single iteration.
-		// Even if we check as we update.
+		// Even if we check as we update. I decided I didn't like the lack of control.
 		if (counter > 1E3) {
 			max_change = get_max_change(grid, grid_next, n);
 			counter = 0;
 		}
 		grid = grid_next;
-		counter++;
+		counter++;		*/		
+		grid = update_grid(grid, n, max_change);
 	} 
 	while (max_change > eps);
 	

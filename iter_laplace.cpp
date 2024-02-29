@@ -32,9 +32,11 @@ double next_grid_val(const rarray<double,2>& grid_state, int ii, int jj) {
 	return V;
 }
 
-rarray<double,2> update_grid(const rarray<double,2>& oldgrid, int n) {
+//rarray<double,2> update_grid(const rarray<double,2>& oldgrid, int n) {
+rarray<double,2> update_grid(const rarray<double,2>& oldgrid, int n, double& max_change) {
 	int n_inner = get_n_inner(n);
-	double max_change = 0.0;
+	//double max_change = 0.0;
+	max_change = 0.0;
 	rarray<double,2> newgrid(n,n);
 	
 	for (int i = 1; i < n-1; i++) {
@@ -43,6 +45,10 @@ rarray<double,2> update_grid(const rarray<double,2>& oldgrid, int n) {
 				newgrid[i][j] = 1;
 			else
 				newgrid[i][j] = next_grid_val(oldgrid, i, j);
+			// Update max change as we go.
+			if (fabs(oldgrid[i][j]-newgrid[i][j]) > max_change) {
+				max_change = fabs(oldgrid[i][j]-newgrid[i][j]);
+			}
 		}
 	}
 	// The edges start to take some weird ~E-300 values after a while,
