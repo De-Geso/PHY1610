@@ -9,9 +9,11 @@ double get_max_change(const rarray<double,2>& oldgrid,
 	int n) {
 		
 	double max_change = 0;
-	
+	// Check entire grid for largest change.
 	for (int i = 1; i < n-1; i++) {
 		for (int j = 1; j < n-1; j++) {
+			// If the current change is bigger than the last biggest
+			// change, it becomes the biggest change.
 			if (fabs(oldgrid[i][j]-newgrid[i][j]) > max_change) {
 				max_change = fabs(oldgrid[i][j]-newgrid[i][j]);
 			}

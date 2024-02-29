@@ -3,6 +3,7 @@
 // This code is part of assignment 5 of the 2024 Winter PHY1610 course.
 #include "init_laplace.h"
 
+
 int get_n_inner(int n)
 {
 	int n_inner;

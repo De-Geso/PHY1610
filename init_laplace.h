@@ -6,7 +6,9 @@
 
 #include <rarray>
 
-// Get the side length of the inner box
+// Get the side length of the inner box. As close as possible to 0.1n.
+// Minimum value of 1.
+// @param  n	size of grid to initialize
 int get_n_inner(int n);
 
 // Fill grid such that the outer box edge is V=0, and there is a 
