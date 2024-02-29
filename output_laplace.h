@@ -6,6 +6,8 @@
 
 #include <rarray>
 #include <iostream>
+#include <fstream>
 
+void dump_grid(const rarray<double,2>& grid, int n);
 
 #endif

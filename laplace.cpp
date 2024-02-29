@@ -6,7 +6,7 @@
 
 int main(int argc, char* argv[]) {
     // Set default simulation parameters then accept command line arguments
-	int n = 10;
+	int n = 500;
 	double eps = 1E-6;
 	
 	try {
@@ -30,14 +30,19 @@ int main(int argc, char* argv[]) {
 	rarray<double,2> grid = initial_grid(n);
 	rarray<double,2> grid_next = grid.copy();
 	
+	int counter = 0;
 	double max_change = eps + 1;
 	do {
 		grid_next = update_grid(grid, n);
-		max_change = get_max_change(grid, grid_next, n);
+		if (counter > n/eps*1E-5) {
+			max_change = get_max_change(grid, grid_next, n);
+			counter = 0;
+			std::cout << counter << '\t';
+		}
 		grid = grid_next;
+		counter++;
 	} 
 	while (max_change > eps);
 	
-	std::cout << grid << std::endl;
-	
+	dump_grid(grid, n);	
 } // end main
