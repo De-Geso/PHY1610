@@ -1,0 +1,38 @@
+# Makefile for the laplace solver
+#
+# Note: plotting was not required for this assignment, nor was a
+# separate 'boundary' module.
+
+CXX = g++
+CXXFLAGS = -pg -g -march=native -O3 
+LDFLAGS = -pg -g
+LDLIBS = -lnetcdf -lnetcdf_c++4
+
+all: laplace
+
+laplace: laplace.o boundary.o initialize.o iteration.o output.o
+	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
+boundary.o: boundary.cpp boundary.h
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+initialize.o: initialize.cpp initialize.h boundary.h
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+iteration.o: iteration.cpp iteration.h boundary.h
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+output.o: output.cpp output.h
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+laplace.o: laplace.cpp boundary.h initialize.h iteration.h output.h
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+clean:
+	$(RM) laplace.o output.o iteration.o initialize.o boundary.o
+
+distclean: clean
+	$(RM) laplace
+
+
+

@@ -1,0 +1,7 @@
+Best candidates are: 
+File	Correlation
+24	0.99222
+17	0.967221
+1	0.939055
+31	0.896847
+4	0.887038

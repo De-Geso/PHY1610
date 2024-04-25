@@ -1,0 +1,17 @@
+Decided to also write the report as a .txt just in case.
+
+The output of gprof can be found in the files serial_output.txt and parallel_output.txt.
+
+For the serial output, the program ran in 40.06 s. It spent most of its time in the get_max_diff function,
+and apply_average function, spending 22.64 s (56.58% of total time) and 16.71 s (41.77% of total time) in
+each respectively. Each of these functions loop over the whole grid of points, and have been parallelized with
+openmp.
+
+Timing results from running on Teach with different numbers of cores can be found in runtime.txt.
+
+I used Jupyter to do a quick fit to the data. Fitting to
+S = Tserial/T(P) = 1/(f + (1−f)/P)      (1)
+where S is the speed up, Tserial is the runtime on 1 core, T(P) is the runtime on P cores, and f is the serial
+fraction gives f = 0.096.
+
+speedup.png shows the Teach speed ups, and fit result. The figure shows speed up as a function of cores. The points are from runtime data on Teach. The solid line is the fit using Eq. (1). The dashed line shows embarrassingly parallel scaling.
